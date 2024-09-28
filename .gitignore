@@ -1,0 +1,91 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+build/
+out/
+
+# TypeScript
+*.tsbuildinfo
+*.js
+*.js.map
+*.d.ts
+
+# Docker
+Dockerfile
+*.dockerignore
+**/Dockerfile
+**/*.env
+*.env
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Misc
+*.tgz
+*.zip
+*.tar.gz
+*.rar
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Ignore build artifacts
+*.tgz
+*.zip
+*.tar
+
+# Ignore compiled binary files
+*.exe
+*.out
+*.app
+
+# Ignore generated files
+*.generated.ts
+*.generated.js
+
+# Ignore specific folders for services
+user-service/node_modules/
+workout-service/node_modules/
+tracking-service/node_modules/
+nutrition-service/node_modules/
+notification-service/node_modules/
+api-gateway/node_modules/
+
+# Ignore local configuration files
+*.local
+
+# Ignore any local environment files
+.env.local
