@@ -3,7 +3,7 @@ import {
   createUserProfile,
   getUserProfile,
   updateUserProfile,
-} from "../controllers/useProfileController";
+} from "../controllers/userProfileController";
 
 const router = express.Router();
 const asyncHandler =

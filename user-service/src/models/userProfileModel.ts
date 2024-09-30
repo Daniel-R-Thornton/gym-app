@@ -5,7 +5,7 @@ import UserModel from "./userModel";
 
 class UserProfileModel extends Model {
   public id!: number; // Primary key
-  public userId!: string;
+  public userId!: number;
   public units!: "kg" | "lbs";
   public height?: number;
   public weight?: number;
@@ -24,8 +24,12 @@ UserProfileModel.init(
       primaryKey: true,
     },
     userId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: UserModel,
+        key: "id",
+      },
     },
     units: {
       type: DataTypes.STRING,
@@ -48,4 +52,7 @@ UserProfileModel.belongsTo(UserModel, {
   foreignKey: "userId",
   as: "user",
 });
+
+UserProfileModel.sync();
+
 export default UserProfileModel;
