@@ -13,6 +13,8 @@ class Set extends Model {
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
+  public ownerId!: number;
+
   //relationships
   public workoutId!: number;
   public equipmentId!: number;
@@ -59,6 +61,15 @@ Set.init(
       allowNull: false,
       references: {
         model: "Equipment",
+        key: "id",
+      },
+    },
+    // In your workout model
+    ownerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "UserProfiles",
         key: "id",
       },
     },
