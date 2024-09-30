@@ -1,4 +1,28 @@
+version: '3.8'
+
 services:
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gym_db
+      POSTGRES_LOGGING: "on"  # Enable logging
+      POSTGRES_LOG_MIN_MESSAGES: "info"  # Set minimum message level to log (can be adjusted to 'debug', 'notice', etc.)
+      POSTGRES_LOG_DESTINATION: "stderr"  # Send logs to stderr
+      POSTGRES_LOG_DIRECTORY: "/var/lib/postgresql/data/log"  # Specify the directory for log files
+      POSTGRES_LOG_FILENAME: "postgresql-%Y-%m-%d_%H%M%S.log"  # Define log filename pattern
+      POSTGRES_LOG_ROTATION_SIZE: "10MB"  # Rotate logs when they reach this size
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - gym-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]  # Use the defined POSTGRES_USER
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
   user-service:
     build:
       context: ./user-service
@@ -7,57 +31,23 @@ services:
     networks:
       - gym-network
     environment:
-      JWT_SECRET: ${JWT_SECRET} 
-  # workout-service:
-  #   build:
-  #     context: ./workout-service
-  #   ports:
-  #     - "3001:3001"
-  #   networks:
-  #     - gym-network
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      postgres:
+        condition: service_healthy  # Waits for PostgreSQL to be healthy before starting
 
-  # tracking-service:
-  #   build:
-  #     context: ./tracking-service
-  #   ports:
-  #     - "3002:3002"
-  #   networks:
-  #     - gym-network
-
-  # nutrition-service:
-  #   build:
-  #     context: ./nutrition-service
-  #   ports:
-  #     - "3003:3003"
-  #   networks:
-  #     - gym-network
-
-  # notification-service:
-  #   build:
-  #     context: ./notification-service
-  #   ports:
-  #     - "3004:3004"
-  #   networks:
-  #     - gym-network
-
-  # api-gateway:
-  #   build:
-  #     context: ./api-gateway
-  #   ports:
-  #     - "80:80"
-  #   networks:
-  #     - gym-network
-
-  postgres:
-    image:  postgres:14-alpine
+  pgadmin:
+    image: dpage/pgadmin4
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: gym_db
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com   # Set a default admin email
+      PGADMIN_DEFAULT_PASSWORD: admin           # Set a default admin password
+    ports:
+      - "8080:80"  # Expose pgAdmin on port 8080
     networks:
       - gym-network
+    depends_on:
+      postgres:
+        condition: service_healthy  # Waits for PostgreSQL to be healthy before starting
 
 networks:
   gym-network:
@@ -65,3 +55,4 @@ networks:
 
 volumes:
   postgres-data:
+    driver: local

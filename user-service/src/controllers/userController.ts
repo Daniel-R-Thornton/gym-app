@@ -13,8 +13,6 @@ export const registerUser = async (
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
-    console.log(req.body);
-    console.log(req);
     return res.status(400).json({ message: "All fields are required." });
   }
   const existingUser = await UserModel.findOne({ where: { email } });
@@ -24,6 +22,7 @@ export const registerUser = async (
   }
 
   const saltRounds = 12;
+
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   try {
@@ -32,6 +31,7 @@ export const registerUser = async (
       email,
       password: hashedPassword,
     });
+
     return res.status(201).json({
       message: "User created successfully!",
       userId: newUser.id,

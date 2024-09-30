@@ -10,6 +10,7 @@ export const authMiddleware = (
   next: NextFunction
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
+
   if (!token) {
     return res
       .status(401)
@@ -18,7 +19,7 @@ export const authMiddleware = (
 
   try {
     const verified = jwt.verify(token, jwtSecret ?? "");
-    (req as any).user = verified; // Use 'as any' to bypass type checks
+    (req as any).user = verified; // Use 'as any' to bypass type checks to save time in overrides for the request object
     next();
   } catch (error) {
     res.status(400).json({ message: "Invalid token." });
