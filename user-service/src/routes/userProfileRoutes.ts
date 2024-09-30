@@ -4,16 +4,12 @@ import {
   getUserProfile,
   updateUserProfile,
 } from "../controllers/userProfileController";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const router = express.Router();
-const asyncHandler =
-  (fn: any) =>
-  (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-  };
 
-router.post("/create", asyncHandler(createUserProfile));
-router.get("/get", asyncHandler(getUserProfile));
-router.put("/update", asyncHandler(updateUserProfile));
+router.post("/create", authMiddleware, createUserProfile);
+router.get("/get", authMiddleware, getUserProfile);
+router.put("/update", authMiddleware, updateUserProfile);
 
 export default router;

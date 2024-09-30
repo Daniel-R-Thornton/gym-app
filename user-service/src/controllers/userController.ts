@@ -6,6 +6,33 @@ import UserModel from "../models/userModel";
 import jwt from "jsonwebtoken";
 import { jwtSecret } from "../config";
 
+/**
+ * @function registerUser
+ * @description Register a new user
+ * @param {Request} req - Express request object
+ * @param {Response} res - Express response object
+ * @returns {Promise<Response>} Promise that resolves when the user is created
+ *
+ * @example
+ * // Request
+ * POST /register HTTP/1.1
+ * Content-Type: application/json
+ * {
+ *   "username": "johnDoe",
+ *   "email": "john.doe@example.com",
+ *   "password": "password123"
+ * }
+ *
+ * // Response
+ * HTTP/1.1 201 Created
+ * Content-Type: application/json
+ * {
+ *   "message": "User created successfully!",
+ *   "userId": 1,
+ *   "username": "johnDoe",
+ *   "email": "john.doe@example.com"
+ * }
+ */
 export const registerUser = async (
   req: Request,
   res: Response
@@ -44,6 +71,30 @@ export const registerUser = async (
   }
 };
 
+/**
+ * @function loginUser
+ * @description Login an existing user
+ * @param {Request} req - Express request object
+ * @param {Response} res - Express response object
+ * @returns {Promise<Response>} Promise that resolves when the user is logged in
+ *
+ * @example
+ * // Request
+ * POST /login HTTP/1.1
+ * Content-Type: application/json
+ * {
+ *   "email": "john.doe@example.com",
+ *   "password": "password123"
+ * }
+ *
+ * // Response
+ * HTTP/1.1 200 OK
+ * Content-Type: application/json
+ * {
+ *   "message": "Login successful!",
+ *   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3MjUxNjA4NCwiZXhwIjoxNjcyNjQwNDg0fQ.0Tqj4eGyfB7cTqJn4aBj5w"
+ * }
+ */
 export const loginUser = async (
   req: Request,
   res: Response
