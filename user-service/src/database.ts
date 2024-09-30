@@ -14,7 +14,6 @@ export const sequelize = new Sequelize(
   }
 );
 
-console.log(sequelize);
 // Test the connection (optional, can be removed later)
 const testConnection = async () => {
   try {
