@@ -49,6 +49,42 @@ services:
       postgres:
         condition: service_healthy  # Waits for PostgreSQL to be healthy before starting
 
+  # workout-service:
+  #   build:
+  #     context: ./workout-service
+  #   ports:
+  #     - "3001:3001"
+  #   networks:
+  #     - gym-network
+  # tracking-service:
+  #   build:
+  #     context: ./tracking-service
+  #   ports:
+  #     - "3002:3002"
+  #   networks:
+  #     - gym-network
+  # nutrition-service:
+  #   build:
+  #     context: ./nutrition-service
+  #   ports:
+  #     - "3003:3003"
+  #   networks:
+  #     - gym-network
+  # notification-service:
+  #   build:
+  #     context: ./notification-service
+  #   ports:
+  #     - "3004:3004"
+  #   networks:
+  #     - gym-network
+  # api-gateway:
+  #   build:
+  #     context: ./api-gateway
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     - gym-network
+  
 networks:
   gym-network:
     driver: bridge
