@@ -12,6 +12,10 @@ app.use(express.json());
 app.use("/users", userRoutes);
 app.use("/profile", userProfileRoutes);
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 // Start the server
 const PORT = process.env.PORT ?? 3000;
 

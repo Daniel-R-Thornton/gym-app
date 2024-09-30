@@ -6,8 +6,12 @@ import { sequelize } from "./database"; // Import your database connection
 const app = express();
 app.use(express.json());
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 // Start the server
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env.PORT ?? 3001;
 
 app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
