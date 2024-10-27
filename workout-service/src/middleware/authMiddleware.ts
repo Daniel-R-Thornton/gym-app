@@ -17,7 +17,9 @@ export const authMiddleware = (
   next: NextFunction
 ): void => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
-
+  console.log(
+    "test-----------------------------------------------------------------<"
+  );
   if (!token) {
     res.status(401).json({ message: "Access denied. No token provided." });
     return; // Ensure no further execution
@@ -28,7 +30,7 @@ export const authMiddleware = (
     (req as any).user = verified; // Attach verified user to req object
     next(); // Call next to continue to the next middleware or route
   } catch (error) {
-    res.status(400).json({ message: "Invalid token." });
+    res.status(400).json({ message: "Invalid token.", outtest: jwtSecret });
     return; // Ensure no further execution
   }
 };

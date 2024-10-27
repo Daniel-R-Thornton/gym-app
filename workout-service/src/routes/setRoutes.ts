@@ -11,10 +11,10 @@ import { authMiddleware } from "../middleware/authMiddleware"; // Import the aut
 const router = Router();
 
 // Define the routes for sets
-router.get("/", authMiddleware, getAllSets); // Get all sets
-router.get("/:id", authMiddleware, getSetById); // Get set by ID
-router.post("/", authMiddleware, createSet); // Create new set
-router.put("/:id", authMiddleware, updateSet); // Update set by ID
-router.delete("/:id", authMiddleware, deleteSet); // Delete set by ID
+router.get("/sets/", authMiddleware, getAllSets); // Get all sets
+router.get("/sets/:id", authMiddleware, getSetById); // Get set by ID
+router.post("/sets/", authMiddleware, createSet); // Create new set
+router.put("/sets/:id", authMiddleware, updateSet); // Update set by ID
+router.delete("/sets/:id", authMiddleware, deleteSet); // Delete set by ID
 
 export default router;

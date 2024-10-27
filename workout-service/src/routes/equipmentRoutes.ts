@@ -12,10 +12,10 @@ import { authMiddleware } from "../middleware/authMiddleware"; // Assuming you h
 const router = Router();
 
 // Define routes with middleware
-router.post("/", authMiddleware, createEquipment); // Create a new equipment
-router.get("/", authMiddleware, getAllEquipment); // Get all equipment
-router.get("/:id", authMiddleware, getEquipmentById); // Get equipment by ID
-router.put("/:id", authMiddleware, updateEquipment); // Update equipment by ID
-router.delete("/:id", authMiddleware, deleteEquipment); // Delete equipment by ID
+router.post("/equipment/", authMiddleware, createEquipment); // Create a new equipment
+router.get("/equipment/", authMiddleware, getAllEquipment); // Get all equipment
+router.get("/equipment/:id", authMiddleware, getEquipmentById); // Get equipment by ID
+router.put("/equipment/:id", authMiddleware, updateEquipment); // Update equipment by ID
+router.delete("/equipment/:id", authMiddleware, deleteEquipment); // Delete equipment by ID
 
 export default router;

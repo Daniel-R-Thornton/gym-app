@@ -8,3 +8,4 @@ export const dbConfig = {
 };
 
 export const jwtSecret = process.env.JWT_SECRET;
+console.log(jwtSecret);
